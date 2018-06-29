@@ -1,1 +1,0 @@
-go build train2.go
