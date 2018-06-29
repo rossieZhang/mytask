@@ -1,0 +1,13 @@
+package gotest
+
+import(
+	"testing"
+)
+
+func TestTrain1(t *testing.T){
+	if i := Train("abccda");i!='b'{
+		t.Error("测试一未通过")
+	｝else{
+		t.Log("测试一通过")
+	｝
+｝
