@@ -2,8 +2,6 @@
 
 import (
 
-	"runtime"
-
 	"bufio"
 
 	"fmt"
@@ -11,11 +9,10 @@ import (
 	"os"
 
 	"strings"
-
-	"time"
 )
 
-
+var num int = 10
+var cnum chan int
 
 func main(){
 
@@ -29,7 +26,8 @@ func main(){
 
 
 	//多进程并发,num为进程数量
-	var num int = 10;
+
+	cnum = make (chan int,num)
 	for i := 1;i<num;i++{
 		go routine(str_in,i)
 
@@ -41,7 +39,11 @@ func main(){
 	fmt.Println("--------------------------")
 
 	//主进程等待子进程
-	time.Sleep(1 * time.Second)
+
+	for i := 1;i<num;i++{
+		<-cnum
+	}
+	fmt.Println("Done")
 }
 
 
@@ -51,7 +53,7 @@ func routine(str_in string, num int){
 
 	fmt.Println("输出字符为:",string(Find(str_in)))
 	fmt.Println("--------------------------")
-	runtime.Gosched()
+	cnum<-1
 
 }
 
