@@ -17,7 +17,6 @@ func main(){
 	str_in := string(data)
 
 	//多进程并发,num为进程数量
-
 	cnum = make (chan int,num)
 	for i := 1;i<num;i++{
 		go routine(str_in,i)
@@ -28,7 +27,6 @@ func main(){
 	fmt.Println("--------------------------")
 
 	//主进程等待子进程
-
 	for i := 1;i<num;i++{
 		<-cnum
 	}
